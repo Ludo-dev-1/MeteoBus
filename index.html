@@ -4,16 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
     <title>Meteo Bus</title>
 </head>
 
-<body>
-    <h1>
-        Bienvenue sur Meteo Bus !
-    </h1>
-    <p>
-        Votre application de prévisions météorologiques pour les arrêts de bus.
-    </p>
+<body class="bg-sky-800 min-h-screen">
+    <header class="header bg-sky-950 text-white p-4 flex justify-between items-center">
+        <h1 class="text-3xl font-bold m-auto">
+            Bienvenue sur Meteo Bus !
+        </h1>
+
+    </header>
+
+    <section class="container mx-auto w-6/12 p-4 text-center bg-sky-900 text-white rounded-lg mt-6">
+        <div class="m-4 p-4 border border-gray-300 rounded-lg shadow-lg">
+            <p class="city mb-4">Météo du jour pour la ville de </p>
+            <h3 class="dateTime"> Prévision pour le </h3>
+            <ul>
+                <li class="temperature">Température : </li>
+                <li class="conditions">Conditions : </li>
+                <li class="pluie">Probabilité de pluie : </li>
+                <li class="vitesse-du-vent">Vitesse du vent : </li>
+            </ul>
+        </div>
+    </section>
+
 </body>
+
+<script type="module" src="./meteo.js"></script>
 
 </html>
