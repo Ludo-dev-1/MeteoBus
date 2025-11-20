@@ -12,10 +12,11 @@ const meteo = async () => {
 
         // Affichage du nom de la ville
         const citySelected = document.querySelector('.city');
-        citySelected.textContent += config["Veuillez indiquer le nom de la ville"] + " :";
+        citySelected.textContent += `${config.city} :`;
+
 
         // Récupération des données météo depuis l'API
-        const inseeCode = config["Veuillez indiquer le code Insee de la ville"];
+        const inseeCode = config.insee;
         const response = await fetch(`https://api.meteo-concept.com/api/forecast/nextHours?token=ef7cf42cb7f8de2125d8015ecdb7bcd8d2398f60697813068ea26840d58da189&insee=${inseeCode}`);
         const data = await response.json();
         console.log(data);
@@ -54,11 +55,24 @@ const meteo = async () => {
         const vent = document.querySelector('.vitesse-du-vent');
         vent.textContent += windSpeed + " km/h";
 
+
         // Affichage des conditions météorologiques avec icônes
         const weatherCode = data.forecast[0].weather;
-        const iconName = weatherIcons[weatherCode];
+        const iconFile = weatherIcons[weatherCode];
+
         const weatherDescription = document.querySelector('.conditions');
-        weatherDescription.textContent += iconName;
+        weatherDescription.textContent += " " + iconFile.replace(".png", "").replace("_", " ");
+
+
+        const iconElement = document.querySelector('#weather-icon');
+
+        if (iconFile) {
+            iconElement.src = `./public/icons/${iconFile}`;
+            iconElement.alt = iconFile;
+        } else {
+            iconElement.src = "./public/icons/default.png"; // icône par défaut
+            iconElement.alt = "default";
+        }
 
     } catch (error) {
         console.error("Erreur lors de la récupération des données météo :", error);
@@ -67,4 +81,6 @@ const meteo = async () => {
 
 meteo();
 
+// Rafraîchissement automatique toutes les heures
+setInterval(meteo, 3600000);
 
